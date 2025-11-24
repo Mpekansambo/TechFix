@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services | TechFix Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    .banner { background: #0d6efd; padding: 60px 20px; text-align: center; color: white; cursor: pointer; }
+    .card h5 { font-weight: bold; margin-bottom: 10px; }
+    .card p { font-size: 0.9rem; color: #555; }
+    .card ul { list-style-type: none; padding-left: 0; }
+    .card ul li { margin-bottom: 8px; }
+    .toast-container { position: fixed; top: 1rem; right: 1rem; z-index: 1080; }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">TechFix Solutions</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- BANNER -->
+<div class="banner" id="ourServicesTitle">
+  <h1 class="fw-bold">Our Services</h1>
+  <p>Explore all the technology solutions we offer</p>
+</div>
+
+<!-- SERVICES CONTENT -->
+<div class="container my-5">
+  <div class="row g-4">
+
+    <!-- Computer Repairs -->
+    <div class="col-md-3">
+      <div class="card shadow p-3 h-100">
+        <h5>Computer Repairs</h5>
+        <ul>
+          <li><a href="computer-hardware-diagnostics.html">Hardware diagnostics & repairs</a></li>
+          <li><a href="computer-windows-installation.html">Windows installation / activation</a></li>
+          <li><a href="computer-data-backup.html">Data backup & recovery</a></li>
+          <li><a href="computer-virus-removal.html">Virus removal & system optimization</a></li>
+          <li><a href="computer-ssd-ram-upgrades.html">SSD/RAM upgrades</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Cellphone Repairs -->
+    <div class="col-md-3">
+      <div class="card shadow p-3 h-100">
+        <h5>Cellphone Repairs</h5>
+        <ul>
+          <li><a href="phone-screen-replacement.html">Screen replacement</a></li>
+          <li><a href="phone-battery-replacement.html">Battery replacement</a></li>
+          <li><a href="phone-charging-port-repair.html">Charging port repair</a></li>
+          <li><a href="phone-software-flashing.html">Software flashing</a></li>
+          <li><a href="phone-camera-speaker-repair.html">Camera & speaker repairs</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Networking Services -->
+    <div class="col-md-3">
+      <div class="card shadow p-3 h-100">
+        <h5>Networking Services</h5>
+        <ul>
+          <li><a href="networking-wifi-setup.html">Wi-Fi setup & troubleshooting</a></li>
+          <li><a href="networking-lan-cabling.html">LAN & Ethernet cabling</a></li>
+          <li><a href="networking-router-config.html">Router configuration</a></li>
+          <li><a href="networking-soho-setup.html">Small office/home office setup</a></li>
+          <li><a href="networking-optimization.html">Network optimization</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Accessories & Tools -->
+    <div class="col-md-3">
+      <div class="card shadow p-3 h-100">
+        <h5>Accessories & Tools</h5>
+        <ul>
+          <li><a href="accessories-phone-cables.html">Phone chargers & USB cables</a></li>
+          <li><a href="accessories-laptop-chargers.html">Laptop chargers & batteries</a></li>
+          <li><a href="accessories-peripherals.html">Computer peripherals (mouse, keyboards)</a></li>
+          <li><a href="accessories-network-tools.html">Network tools & testers</a></li>
+          <li><a href="accessories-refurbished.html">Refurbished laptops & smartphones</a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="container my-5 text-center" id="contact">
+  <h2 class="fw-bold mb-4">Get In Touch</h2>
+  <button class="btn btn-primary btn-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#messageModal">
+    Send us a Message
+  </button>
+</div>
+
+<!-- MESSAGE MODAL -->
+<div class="modal fade" id="messageModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 350px;">
+    <div class="modal-content">
+      <div class="modal-header py-2 px-3">
+        <h5 class="modal-title fw-bold">Send a Message</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="contactForm">
+        <div class="modal-body py-2 px-3">
+          <label class="form-label fw-semibold">Your Name</label>
+          <input id="name" class="form-control form-control-sm mb-2" placeholder="John Doe" required>
+          <label class="form-label fw-semibold">Your Email</label>
+          <input id="email" type="email" class="form-control form-control-sm mb-2" placeholder="example@mail.com" required>
+          <label class="form-label fw-semibold">Message</label>
+          <textarea id="message" rows="2" class="form-control form-control-sm" placeholder="Write your message..." required></textarea>
+        </div>
+        <div class="modal-footer py-2 px-3">
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary btn-sm" type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-container">
+  <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">Message sent successfully!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+  import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvuIuy8B1QlGJk5uZFY-uzFNUKZ0P1O7U",
+    authDomain: "techfix-messages.firebaseapp.com",
+    databaseURL: "https://techfix-messages-default-rtdb.firebaseio.com/",
+    projectId: "techfix-messages",
+    storageBucket: "techfix-messages.firebasestorage.app",
+    messagingSenderId: "857990920188",
+    appId: "1:857990920188:web:0c830bdd0cde48030f6479"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const auth = getAuth();
+
+  const toastEl = document.getElementById('successToast');
+  const toast = bootstrap.Toast.getOrCreateInstance(toastEl);
+
+  const contactForm = document.getElementById("contactForm");
+  contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    push(ref(db, 'messages'), { name, email, message, timestamp: Date.now() })
+      .then(() => {
+        toast.show();
+        contactForm.reset();
+        const modalEl = bootstrap.Modal.getInstance(document.getElementById('messageModal'));
+        if (modalEl) modalEl.hide();
+      })
+      .catch((error) => alert("Error sending message: " + error));
+  });
+
+  // Clickable "Our Services" heading (admin only)
+  const ourServicesTitle = document.getElementById("ourServicesTitle");
+  ourServicesTitle.addEventListener("click", (e) => {
+    e.preventDefault();
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const userRef = ref(db, `users/${user.uid}`);
+        onValue(userRef, snapshot => {
+          const userData = snapshot.val();
+          if (userData && userData.role === "admin") {
+            window.location.href = "admin-dashboard.html";
+          } else {
+            alert("Only admins can access the dashboard.");
+          }
+        }, { onlyOnce: true });
+      } else {
+        alert("You must be logged in as an admin.");
+      }
+    });
+  });
+
+</script>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center p-3 mt-5">
+  <p class="mb-0">© 2025 TechFix Solutions — All Rights Reserved</p>
+</footer>
+
+</body>
+</html>

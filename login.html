@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | TechFix Solutions</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    /* Match index.html hero aesthetic */
+    body {
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1600');
+      background-size: cover;
+      background-position: center;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+    }
+
+    .login-card {
+      padding: 2rem;
+      border-radius: 0.5rem;
+      background: rgba(0,0,0,0.75);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      width: 100%;
+      max-width: 400px;
+      color: white;
+      backdrop-filter: blur(6px);
+    }
+
+    .login-card h2 {
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #ffffff;
+    }
+
+    .form-label {
+      color: #ddd;
+    }
+
+    .form-control {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+    }
+
+    .form-control::placeholder {
+      color: #cccccc;
+    }
+
+    .btn-primary {
+      background-color: #0d6efd !important;
+      border: none;
+    }
+
+    .btn-success {
+      background-color: #198754 !important;
+      border: none;
+    }
+
+    .toggle-link {
+      cursor: pointer;
+      color: #0d6efd;
+      text-decoration: underline;
+    }
+
+    .error-msg {
+      color: #ff6b6b;
+      margin-bottom: 1rem;
+      display: none;
+      text-align: center;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<div class="login-card">
+  <h2 id="formTitle">Admin Login</h2>
+  <div class="error-msg" id="errorMsg"></div>
+
+  <!-- Login Form -->
+  <form id="loginForm">
+    <div class="mb-3">
+      <label for="email" class="form-label fw-semibold">Email</label>
+      <input type="email" id="email" class="form-control" placeholder="admin@example.com" required>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label fw-semibold">Password</label>
+      <input type="password" id="password" class="form-control" placeholder="********" required>
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="rememberMe">
+      <label class="form-check-label" for="rememberMe">Remember Me</label>
+    </div>
+    <button type="submit" class="btn btn-primary w-100" id="loginBtn">Login</button>
+    <p class="mt-3 text-center">Don't have an account? <span class="toggle-link" id="toggleForm">Create Admin Account</span></p>
+  </form>
+
+  <!-- Create Admin Form -->
+  <form id="createForm" style="display: none;">
+    <div class="mb-3">
+      <label for="createEmail" class="form-label fw-semibold">Email</label>
+      <input type="email" id="createEmail" class="form-control" placeholder="admin@example.com" required>
+    </div>
+    <div class="mb-3">
+      <label for="createPassword" class="form-label fw-semibold">Password</label>
+      <input type="password" id="createPassword" class="form-control" placeholder="********" required>
+    </div>
+    <button type="submit" class="btn btn-success w-100" id="createBtn">Create Account</button>
+    <p class="mt-3 text-center">Already have an account? <span class="toggle-link" id="toggleLogin">Login</span></p>
+  </form>
+</div>
+
+
+<!-- Firebase Logic — unchanged -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+  import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvuIuy8B1QlGJk5uZFY-uzFNUKZ0P1O7U",
+    authDomain: "techfix-messages.firebaseapp.com",
+    databaseURL: "https://techfix-messages-default-rtdb.firebaseio.com/",
+    projectId: "techfix-messages",
+    storageBucket: "techfix-messages.firebasestorage.app",
+    messagingSenderId: "857990920188",
+    appId: "1:857990920188:web:0c830bdd0cde48030f6479"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+  const db = getDatabase(app);
+
+  const loginForm = document.getElementById("loginForm");
+  const createForm = document.getElementById("createForm");
+  const errorMsg = document.getElementById("errorMsg");
+  const toggleFormLink = document.getElementById("toggleForm");
+  const toggleLoginLink = document.getElementById("toggleLogin");
+  const formTitle = document.getElementById("formTitle");
+
+  toggleFormLink.addEventListener("click", () => {
+    loginForm.style.display = "none";
+    createForm.style.display = "block";
+    errorMsg.style.display = "none";
+    formTitle.textContent = "Create Admin Account";
+  });
+
+  toggleLoginLink.addEventListener("click", () => {
+    loginForm.style.display = "block";
+    createForm.style.display = "none";
+    errorMsg.style.display = "none";
+    formTitle.textContent = "Admin Login";
+  });
+
+  async function checkAdmin(uid) {
+    try {
+      const snapshot = await get(child(ref(db), `users/${uid}`));
+      return snapshot.exists() && snapshot.val().admin === true;
+    } catch (error) {
+      return false;
+    }
+  }
+
+  loginForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+    const rememberMe = document.getElementById("rememberMe").checked;
+
+    try {
+      await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const isAdmin = await checkAdmin(userCredential.user.uid);
+
+      if (isAdmin) {
+        window.location.href = "admin-dashboard.html";
+      } else {
+        await auth.signOut();
+        errorMsg.style.display = "block";
+        errorMsg.textContent = "Access denied: not an admin.";
+      }
+    } catch (error) {
+      errorMsg.style.display = "block";
+      errorMsg.textContent = "Login error: " + error.message;
+    }
+  });
+
+  createForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("createEmail").value.trim();
+    const password = document.getElementById("createPassword").value;
+
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      const uid = userCredential.user.uid;
+
+      await set(ref(db, `users/${uid}`), { email, admin: true });
+      await signInWithEmailAndPassword(auth, email, password);
+
+      window.location.href = "admin-dashboard.html";
+    } catch (error) {
+      errorMsg.style.display = "block";
+      errorMsg.textContent = "Error creating account: " + error.message;
+    }
+  });
+
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const isAdmin = await checkAdmin(user.uid);
+      if (isAdmin) window.location.href = "admin-dashboard.html";
+    }
+  });
+</script>
+
+</body>
+</html>

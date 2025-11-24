@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechFix Solutions | Repairs • Accessories • Sales</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    .hero {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+                  url('https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&w=1600');
+      background-size: cover;
+      background-position: center;
+      padding: 120px 20px;
+      color: white;
+      text-align: center;
+    }
+
+    /* ⭐ REAL SMALL NAVBAR BUTTON (for mobile admin login) ⭐ */
+    .btn-nav-sm {
+      font-size: 0.75rem;
+      padding: 3px 8px;
+      line-height: 1;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">TechFix Solutions</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+
+        <!-- ⭐ Mobile Admin Login (Small Button) ⭐ -->
+        <li class="nav-item d-lg-none mt-2">
+          <a href="login.html" class="btn btn-warning btn-nav-sm w-100 fw-bold">
+            Admin Login
+          </a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <h1 class="display-4 fw-bold">Fast & Reliable Tech Repair Services</h1>
+  <p class="lead">Computers • Phones • Networks • Accessories</p>
+  <a href="services.html" class="btn btn-primary btn-lg">View Services</a>
+</div>
+
+<!-- SERVICES PREVIEW -->
+<div class="container mt-5">
+  <h2 class="fw-bold text-center mb-4">Our Main Services</h2>
+
+  <div class="row text-center g-4">
+    <div class="col-md-3">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="fw-bold">Computer Repairs</h5>
+          <p>Professional hardware & software repairs.</p>
+          <a href="services.html" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="fw-bold">Cellphone Repairs</h5>
+          <p>Screen, battery, charging fixes & more.</p>
+          <a href="services.html" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="fw-bold">Networking</h5>
+          <p>Wi-Fi setup, LAN cabling & troubleshooting.</p>
+          <a href="services.html" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="card shadow h-100">
+        <div class="card-body">
+          <h5 class="fw-bold">Accessories</h5>
+          <p>Chargers, cables, tools, PCs & phones.</p>
+          <a href="services.html" class="btn btn-outline-primary btn-sm">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="container my-5 text-center" id="contact">
+  <h2 class="fw-bold mb-4">Get In Touch</h2>
+  <button class="btn btn-primary btn-sm px-4 py-2" data-bs-toggle="modal" data-bs-target="#messageModal">
+    Send us a Message
+  </button>
+</div>
+
+<!-- MESSAGE MODAL -->
+<div class="modal fade" id="messageModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 350px;">
+    <div class="modal-content">
+      <div class="modal-header py-2 px-3">
+        <h5 class="modal-title fw-bold">Send a Message</h5>
+        <button class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <form id="contactForm">
+        <div class="modal-body py-2 px-3">
+          <label class="form-label fw-semibold">Your Name</label>
+          <input id="name" class="form-control form-control-sm mb-2" placeholder="John Doe" required>
+          <label class="form-label fw-semibold">Your Email</label>
+          <input id="email" type="email" class="form-control form-control-sm mb-2" placeholder="example@mail.com" required>
+          <label class="form-label fw-semibold">Message</label>
+          <textarea id="message" rows="2" class="form-control form-control-sm" placeholder="Write your message..." required></textarea>
+        </div>
+        <div class="modal-footer py-2 px-3">
+          <button class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary btn-sm" type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Notification -->
+<div class="toast-container">
+  <div id="successToast" class="toast align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+      <div class="toast-body">Message sent successfully!</div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<!-- Firebase -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBvuIuy8B1QlGJk5uZFY-uzFNUKZ0P1O7U",
+    authDomain: "techfix-messages.firebaseapp.com",
+    databaseURL: "https://techfix-messages-default-rtdb.firebaseio.com/",
+    projectId: "techfix-messages",
+    storageBucket: "techfix-messages.firebasestorage.app",
+    messagingSenderId: "857990920188",
+    appId: "1:857990920188:web:0c830bdd0cde48030f6479"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+
+  const toastEl = document.getElementById('successToast');
+  const toast = bootstrap.Toast.getOrCreateInstance(toastEl);
+
+  const contactForm = document.getElementById("contactForm");
+  contactForm.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const message = document.getElementById("message").value;
+
+    push(ref(db, 'messages'), { name, email, message, timestamp: Date.now() })
+      .then(() => {
+        toast.show();
+        contactForm.reset();
+        const modalEl = bootstrap.Modal.getInstance(document.getElementById('messageModal'));
+        if (modalEl) modalEl.hide();
+      })
+      .catch((error) => alert("Error sending message: " + error));
+  });
+</script>
+
+<!-- FOOTER -->
+<footer class="bg-dark text-white text-center p-3 mt-5">
+  <p class="mb-0">© 2025 TechFix Solutions — All Rights Reserved</p>
+</footer>
+
+</body>
+</html>
