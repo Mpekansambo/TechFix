@@ -14,6 +14,45 @@
       text-align: center;
       color: white;
     }
+
+    /* IMAGE GALLERY - UNIFORM HEIGHT, FULLY VISIBLE */
+    .service-images {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: nowrap;
+    }
+
+    .service-images .image-container {
+      flex: 0 0 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .service-images img {
+      max-width: 100%;
+      max-height: 250px;
+      object-fit: contain;
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: transform .3s ease;
+      cursor: pointer;
+    }
+
+    .service-images img:hover {
+      transform: scale(1.05);
+    }
+
+    /* MOBILE RESPONSIVENESS */
+    @media (max-width: 768px) {
+      .service-images {
+        flex-wrap: wrap;
+      }
+      .service-images .image-container {
+        flex: 0 0 100%;
+      }
+    }
   </style>
 </head>
 
@@ -60,9 +99,43 @@
       <li>Affordable upgrade recommendations</li>
     </ul>
 
-    <a href="services.html" class="btn btn-primary mt-3">← Back to Services</a>
+    <!-- IMAGE GALLERY SECTION -->
+    <h4 class="fw-bold mt-5">Sample Upgrade Work</h4>
+    <p>Here are some examples of SSD and RAM upgrades:</p>
+
+    <div class="service-images mt-2">
+      <div class="image-container">
+        <img src="images/opt1.png" alt="SSD upgrade example" onclick="openLightbox(this.src)">
+      </div>
+      <div class="image-container">
+        <img src="images/tools2.png" alt="RAM upgrade example" onclick="openLightbox(this.src)">
+      </div>
+    </div>
+
+    <a href="services.html" class="btn btn-primary mt-4">← Back to Services</a>
   </div>
 </div>
+
+<!-- LIGHTBOX MODAL -->
+<div class="modal fade" id="lightboxModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content bg-dark">
+      <div class="modal-body p-0">
+        <img id="lightboxImage" class="img-fluid w-100" style="border-radius: 5px;">
+      </div>
+      <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3"
+              data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightboxImage').src = src;
+    const modal = new bootstrap.Modal(document.getElementById('lightboxModal'));
+    modal.show();
+  }
+</script>
 
 <!-- FOOTER -->
 <footer class="bg-dark text-white text-center p-3">
